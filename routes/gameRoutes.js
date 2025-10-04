@@ -1,9 +1,9 @@
 const { Router } = require("express");
+const gameController = require("../controllers/gameControllers.js");
 
 const gameRouter = Router();
 
-gameRouter.get("/", (req, res) => {
-    return res.status(200).json({ success: true, message: "hello world" });
-});
+gameRouter.get("/", gameController.getWelcome);
+gameRouter.post("/game", gameController.submitCoords);
 
 module.exports = gameRouter;
