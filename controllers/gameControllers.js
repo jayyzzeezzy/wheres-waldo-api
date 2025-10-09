@@ -83,3 +83,12 @@ exports.submitCoords = (req, res) => {
         next(error)
     }
 };
+
+exports.gameOver = (req, res) => {
+    try {
+        calculate.game.endTime = new Date();
+        return res.status(200).json({ endTime: calculate.game.endTime });
+    } catch (error) {
+        next(error);
+    }
+};
