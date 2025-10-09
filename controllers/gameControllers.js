@@ -1,4 +1,5 @@
 const calculate = require("../util/calculate.js");
+const moment = require("moment");
 
 exports.compareMarginalErrors = (userInput, correctAnswer, errorRange) => {
     const diff = Math.abs(userInput - correctAnswer);
@@ -87,7 +88,9 @@ exports.submitCoords = (req, res) => {
 exports.gameOver = (req, res) => {
     try {
         calculate.game.endTime = new Date();
-        return res.status(200).json({ endTime: calculate.game.endTime });
+        const calculateScore = calculate.game.endTime - calculate.game.startTime;
+        const score = moment(calculateScore).format("mm:ss:SSS");
+        return res.status(200).json({ timeTaken: score });
     } catch (error) {
         next(error);
     }
